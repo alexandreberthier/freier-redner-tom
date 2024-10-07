@@ -190,9 +190,9 @@ const messageError: Ref<string> = ref('')
 const successMessage: Ref<string> = ref('')
 const errorMessage: Ref<string> = ref('')
 
-const SERVICE_ID = import.meta.env.EMAILJS_SERVICE_ID;
-const TEMPLATE_ID = import.meta.env.EMAILJS_TEMPLATE_ID;
-const USER_ID = import.meta.env.EMAILJS_USER_ID;
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const USER_ID = import.meta.env.VITE_EMAILJS_USER_ID;
 
 function sendContactForm() {
   let isValid = true;
