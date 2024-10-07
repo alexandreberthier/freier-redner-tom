@@ -39,7 +39,7 @@ const userError: ModelRef<string | undefined> = defineModel('error', { default: 
 
 
 watch(userInput, (newVal: string) => {
-  if (newVal) {
+  if (newVal.trim()) {
     switch (dynamicInputType.value) {
       case InputType.Phone:
         userError.value = validatePhoneNumber(newVal) ? '' : 'Ungültige Telefonnummer';

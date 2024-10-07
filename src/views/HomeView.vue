@@ -24,7 +24,6 @@
         />
       </div>
     </section>
-
     <section class="hero-images">
       <div ref="image1" class="image-wrapper fade-up">
         <img class="image1" :src="getImage('hochzeit1.png')" alt="hochzeit">
@@ -75,15 +74,9 @@
   <div class="site-wrapper">
     <section class="faq-section">
       <h2>FAQs</h2>
-      <p>Irgendwelche Fragen?</p>
+      <p>Fragen?</p>
       <div class="accordion-flex">
-        <AccordionItem
-            v-for="faq in faqs"
-            :key="faq.id"
-            :faq="faq"
-            :is-open="activeIndex === faq.id"
-            @toggleContent="toggleContent(faq.id)"
-        />
+        <DynamicAccordion :accordion-items="faqs"/>
       </div>
     </section>
 
@@ -147,7 +140,7 @@
               :button-type="ButtonType.Primary"
           />
           <p v-if="successMessage">{{ successMessage }}</p>
-          <p v-if="errorMessage">{{errorMessage}}</p>
+          <p v-if="errorMessage">{{ errorMessage }}</p>
         </div>
       </div>
     </section>
@@ -163,10 +156,10 @@ import {getImage} from "@/utils/ImageUtils";
 import DynamicSlider from "@/components/DynamicSlider.vue";
 import ServiceCard from "@/components/ServiceCard.vue";
 import type {Service} from "@/models/PropInterfaces";
-import AccordionItem from "@/components/AccordionItem.vue";
 import DynamicInputField from "@/components/DynamicInputField.vue";
 import {InputType} from "@/models/Enums";
 import emailjs from 'emailjs-com';
+import DynamicAccordion from "@/components/DynamicAccordion.vue";
 
 interface ContactOption {
   href: string,
@@ -205,6 +198,7 @@ function sendContactForm() {
     { value: message, error: messageError }
   ];
 
+  // Überprüfe jedes Feld
   fields.forEach(field => {
     if (!field.value.value) {
       field.error.value = 'Feld darf nicht leer sein';
@@ -214,37 +208,40 @@ function sendContactForm() {
     }
   });
 
+  // Falls es ungültige Felder gibt, scrolle zum ersten Fehlerfeld
   if (!isValid) {
     nextTick(() => {
-      const firstErrorElement = document.querySelector('.error');
+      const firstErrorElement = document.querySelector('.input-wrapper .error');
       if (firstErrorElement) {
         firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
-  } else {
-    const templateParams = {
-      firstName: firstName.value,
-      lastName: lastName.value,
-      email: email.value,
-      phoneNumber: phoneNumber.value,
-      message: message.value
-    };
-
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
-        .then(() => {
-          successMessage.value = 'Formular erfolgreich gesendet!';
-          firstName.value = '';
-          lastName.value = '';
-          email.value = '';
-          phoneNumber.value = '';
-          message.value = '';
-        })
-        .catch(error => {
-          errorMessage.value = 'Formular konnte nicht gesendet werden'
-          console.error('Fehler beim Senden der E-Mail:', error);
-        })
+    return;
   }
+
+  const templateParams = {
+    firstName: firstName.value,
+    lastName: lastName.value,
+    email: email.value,
+    phoneNumber: phoneNumber.value,
+    message: message.value
+  };
+
+  emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
+      .then(() => {
+        successMessage.value = 'Formular erfolgreich gesendet!';
+        firstName.value = '';
+        lastName.value = '';
+        email.value = '';
+        phoneNumber.value = '';
+        message.value = '';
+      })
+      .catch(error => {
+        errorMessage.value = 'Formular konnte nicht gesendet werden';
+        console.error('Fehler beim Senden der E-Mail:', error);
+      });
 }
+
 
 const hero = ref(null);
 const image1 = ref(null)
