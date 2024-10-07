@@ -147,6 +147,7 @@
               :button-type="ButtonType.Primary"
           />
           <p v-if="successMessage">{{ successMessage }}</p>
+          <p v-if="errorMessage">{{errorMessage}}</p>
         </div>
       </div>
     </section>
@@ -165,6 +166,7 @@ import type {Service} from "@/models/PropInterfaces";
 import AccordionItem from "@/components/AccordionItem.vue";
 import DynamicInputField from "@/components/DynamicInputField.vue";
 import {InputType} from "@/models/Enums";
+import emailjs from 'emailjs-com';
 
 interface ContactOption {
   href: string,
@@ -186,16 +188,21 @@ const emailError: Ref<string> = ref('')
 const messageError: Ref<string> = ref('')
 
 const successMessage: Ref<string> = ref('')
+const errorMessage: Ref<string> = ref('')
+
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const USER_ID = import.meta.env.VITE_EMAILJS_USER_ID;
 
 function sendContactForm() {
   let isValid = true;
 
   const fields = [
-    {value: firstName, error: firstNameError},
-    {value: lastName, error: lastNameError},
-    {value: email, error: emailError},
-    {value: phoneNumber, error: phoneNumberError},
-    {value: message, error: messageError}
+    { value: firstName, error: firstNameError },
+    { value: lastName, error: lastNameError },
+    { value: email, error: emailError },
+    { value: phoneNumber, error: phoneNumberError },
+    { value: message, error: messageError }
   ];
 
   fields.forEach(field => {
@@ -211,12 +218,31 @@ function sendContactForm() {
     nextTick(() => {
       const firstErrorElement = document.querySelector('.error');
       if (firstErrorElement) {
-        firstErrorElement.scrollIntoView({behavior: 'smooth', block: 'center'});
+        firstErrorElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
     });
   } else {
-    console.log("Formular erfolgreich abgesendet");
-    successMessage.value = 'Formular erfolgreich gesendet'
+    const templateParams = {
+      firstName: firstName.value,
+      lastName: lastName.value,
+      email: email.value,
+      phoneNumber: phoneNumber.value,
+      message: message.value
+    };
+
+    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, USER_ID)
+        .then(() => {
+          successMessage.value = 'Formular erfolgreich gesendet!';
+          firstName.value = '';
+          lastName.value = '';
+          email.value = '';
+          phoneNumber.value = '';
+          message.value = '';
+        })
+        .catch(error => {
+          errorMessage.value = 'Formular konnte nicht gesendet werden'
+          console.error('Fehler beim Senden der E-Mail:', error);
+        })
   }
 }
 
