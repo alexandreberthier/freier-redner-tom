@@ -16,3 +16,8 @@ export interface FaqItem {
     question: string,
     answer: string
 }
+
+export interface Image {
+    image: string,
+    alt: string
+}

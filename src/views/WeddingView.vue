@@ -1,14 +1,25 @@
 <template>
-  <div class="site-wrapper">
-    <h1>Hochzeit</h1>
-    <DynamicAccordion :show-c-t-a="true" :accordion-items="faqs"/>
-  </div>
+  <TopLayout
+      header="Hochzeit"
+      image1="wedding1.jpg"
+      image2="wedding2.jpg"
+      sub-header="Gemeinsam gestalten wir eine unvergessliche Zeremonie, die eure Geschichte und Wünsche auf besondere Weise zum Ausdruck bringt."
+      :text-title="text.weddingTextTitle"
+      :text-content="text.weddingText"
+  >
+    <StaticSection>
+      <DynamicAccordion :show-c-t-a="true" :accordion-items="faqs"/>
+    </StaticSection>
+  </TopLayout>
 </template>
 
 <script setup lang="ts">
 
 import DynamicAccordion from "@/components/DynamicAccordion.vue";
 import {ref} from "vue";
+import StaticSection from "@/components/layouts/StaticSection.vue";
+import TopLayout from "@/components/layouts/TopLayout.vue";
+import text from "@/texts/text.json";
 
 const faqs = ref([
   {

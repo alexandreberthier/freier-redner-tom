@@ -1,35 +1,17 @@
 <template>
-  <div class="site-wrapper">
-    <div class="heading">
-      <h1>Über mich</h1>
-      <p>Schön, dass du hier bist. Ich freue mich, dich bei der Gestaltung einer unvergesslichen Zeremonie zu begleiten
-        – ganz nach deinen Wünschen und Vorstellungen.</p>
-    </div>
-    <div class="image-section">
-      <div class="right-section">
-        <div class="image-wrapper">
-          <img :src="getImage('hochzeit1.png')" alt="">
-        </div>
-        <div class="text-section">
-          <h3>einfach Ich</h3>
-          <div>
-            <p> Es freut mich sehr, dass es Euch auf meine Seite verschlagen hat!</p>
-            <p> Gerne möchte ich euch ein bisschen von mir erzählen, aber natürlich noch viel lieber bei unserem
-              persönlichen Erstgespräch.</p>
-            <p> Seit Kurzem habe ich das Wandern mit meiner Frau und Tochter für mich entdeckt, es ist nur schade, dass
-              unsere Josie (Katze) da nicht mitkommen kann. Natürlich werden dann zu Hause die Kuscheleinheiten
-              nachgeholt.</p>
-          </div>
-        </div>
-      </div>
-      <div class="left-section">
-        <div class="image-wrapper">
-          <img :src="getImage('hochzeit2.png')" alt="">
-        </div>
-      </div>
-    </div>
-    <DynamicAccordion :accordion-items="faqs"/>
-  </div>
+  <TopLayout
+      header="Über mich"
+      image1="tom2.png"
+      image2="tom1.png"
+      sub-header="Schön, dass du hier bist. Ich freue mich, dich bei der Gestaltung einer unvergesslichen Zeremonie zu begleiten
+        – ganz nach deinen Wünschen und Vorstellungen."
+      :text-title="text.aboutMeTextTitle"
+      :text-content="text.aboutMeText"
+  >
+    <StaticSection>
+      <DynamicAccordion :accordion-items="faqs"/>
+    </StaticSection>
+  </TopLayout>
   <div class="banner">
     <div class="inner-banner">
       <div class="text">
@@ -66,7 +48,6 @@
       </div>
     </div>
   </div>
-
 </template>
 
 <script setup lang="ts">
@@ -76,6 +57,10 @@ import {ref} from "vue";
 import {getImage} from "@/utils/ImageUtils";
 import {ButtonType} from "@/models/ButtonTypes";
 import DynamicButton from "@/components/DynamicButton.vue";
+import StaticSection from "@/components/layouts/StaticSection.vue";
+import TopLayout from "@/components/layouts/TopLayout.vue";
+import text from "@/texts/text.json"
+
 
 const faqs = ref([
   {
@@ -131,47 +116,6 @@ const facts = ref([
 </script>
 
 <style scoped>
-
-.heading {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  p {
-    font-size: 16px;
-  }
-}
-
-.image-section {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  .right-section {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-
-    .text-section {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-  }
-
-  .image-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 14px;
-    }
-  }
-}
-
 .banner {
   width: 100%;
   display: flex;
@@ -250,42 +194,6 @@ const facts = ref([
 }
 
 @media (min-width: 740px) {
-  .image-section {
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 16px;
-
-    .right-section {
-      width: 40%;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-
-      .text-section {
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-      }
-    }
-
-    .left-section {
-      width: 60%;
-      align-self: flex-end;
-    }
-
-    .image-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      img {
-        width: 100%;
-        height: 100%;
-        border-radius: 14px;
-      }
-    }
-  }
-
   .banner {
     .inner-banner {
       width: 620px;
@@ -363,69 +271,6 @@ const facts = ref([
 
 
 @media (min-width: 1200px) {
-  .heading {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-end;
-    justify-content: space-between;
-
-
-    h1 {
-      white-space: nowrap;
-    }
-
-    p {
-      width: 40%;
-    }
-  }
-
-  .image-section {
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 16px;
-
-    .right-section {
-      width: 40%;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-
-      .image-wrapper {
-        justify-content: flex-end;
-
-        img {
-          width: 250px;
-        }
-      }
-    }
-
-    .left-section {
-      width: 60%;
-      align-self: flex-end;
-
-      .image-wrapper {
-        justify-content: flex-start;
-
-        img {
-          width: 400px;
-        }
-      }
-    }
-
-    .image-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      img {
-        width: 100%;
-        height: 100%;
-        border-radius: 14px;
-      }
-    }
-  }
-
-
   .banner {
     padding: 50px 0;
 
@@ -506,52 +351,6 @@ const facts = ref([
 }
 
 @media (min-width: 1920px) {
-  .image-section {
-    display: flex;
-    flex-direction: row-reverse;
-    gap: 16px;
-
-    .right-section {
-      width: 40%;
-      display: flex;
-      flex-direction: column;
-      gap: 60px;
-
-      .image-wrapper {
-        justify-content: flex-end;
-
-        img {
-          width: 320px;
-        }
-      }
-    }
-
-    .left-section {
-      width: 60%;
-      align-self: flex-end;
-
-      .image-wrapper {
-        justify-content: flex-start;
-
-        img {
-          width: 500px;
-        }
-      }
-    }
-
-    .image-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      img {
-        width: 100%;
-        height: 100%;
-        border-radius: 14px;
-      }
-    }
-  }
-
   .banner {
     padding: 50px 0;
 
@@ -599,8 +398,6 @@ const facts = ref([
         object-fit: cover;
       }
     }
-
-
   }
 }
 

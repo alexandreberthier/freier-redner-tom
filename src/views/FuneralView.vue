@@ -1,14 +1,25 @@
 <template>
-  <div class="site-wrapper">
-    <h1>Lebensfeier / Trauerfeier</h1>
-    <DynamicAccordion :show-c-t-a="true" :accordion-items="faqs"/>
-  </div>
+  <TopLayout
+      header="Lebens / Trauerfeier"
+      image1="funeral1.jpg"
+      image2="funeral2.jpg"
+      sub-header="Gemeinsam schaffen wir einen würdevollen Abschied, der das Leben eures geliebten Menschen in all seinen Facetten liebevoll in Erinnerung ruft."
+      :text-title="text.funeralTextTitle"
+      :text-content="text.funeralText"
+  >
+    <StaticSection>
+      <DynamicAccordion :show-c-t-a="true" :accordion-items="faqs"/>
+    </StaticSection>
+  </TopLayout>
 </template>
 
 <script setup lang="ts">
 
 import DynamicAccordion from "@/components/DynamicAccordion.vue";
 import {ref} from "vue";
+import StaticSection from "@/components/layouts/StaticSection.vue";
+import TopLayout from "@/components/layouts/TopLayout.vue";
+import text from "@/texts/text.json";
 
 const faqs = ref([
   {
