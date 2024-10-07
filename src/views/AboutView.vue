@@ -49,6 +49,24 @@
       </div>
     </div>
   </div>
+  <div class="site-wrapper">
+    <div class="video-section">
+      <div class="image-wrapper">
+        <img :src="getImage('tomvideo.png')" alt="tomvideo">
+      </div>
+      <div class="facts-wrapper">
+        <div v-for="(fact,index) in facts"
+             :key="index"
+             class="fact">
+          <div class="icon-wrapper">
+            <img :src="getImage(fact.icon)" :alt="fact.alt">
+          </div>
+          <p>{{ fact.text }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </template>
 
 <script setup lang="ts">
@@ -86,6 +104,29 @@ const faqs = ref([
     answer: "Nach unserem ersten Gespräch beginne ich mit der Planung und Gestaltung der Zeremonie. Ich schreibe die Rede, stimme mich regelmäßig mit euch ab und sorge dafür, dass alles genau so wird, wie ihr es euch wünscht."
   }
 ]);
+
+const facts = ref([
+  {
+    icon: 'ic_language.png',
+    alt: 'buchstabe icon',
+    text: 'Deutsch, Englisch'
+  },
+  {
+    icon: 'ic_microphone.png',
+    alt: 'mikrofon icon',
+    text: 'Trauung, Kinderwillkommensfest'
+  },
+  {
+    icon: 'ic_paint.png',
+    alt: 'malen icon',
+    text: 'Liebt Pizza,gute Serien und redet gern'
+  },
+  {
+    icon: 'ic_graduation.png',
+    alt: 'hut icon',
+    text: 'Zertifizierter Freier Redner (ZFR)'
+  }
+])
 
 </script>
 
@@ -157,11 +198,52 @@ const faqs = ref([
       align-items: center;
       justify-content: center;
 
-      img{
+      img {
         width: 100%;
         height: 100%;
         border-radius: 14px;
         object-fit: cover;
+      }
+    }
+  }
+}
+
+.video-section {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+
+  .image-wrapper {
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 14px;
+    }
+  }
+
+  .facts-wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+
+    .fact {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+
+
+      .icon-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+          width: 40px;
+          height: 40px;
+        }
       }
     }
   }
@@ -222,15 +304,61 @@ const faqs = ref([
         align-items: center;
         justify-content: center;
 
-        img{
+        img {
           width: 100%;
-          height:300px;
+          height: 300px;
           border-radius: 14px;
           object-position: center;
         }
       }
     }
   }
+
+  .video-section {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 36px;
+
+    .image-wrapper {
+      width: 50%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 14px;
+        object-fit: cover;
+      }
+    }
+
+    .facts-wrapper {
+      width: 50%;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+
+      .fact {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+
+
+        .icon-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 40px;
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
+
 }
 
 
@@ -300,6 +428,7 @@ const faqs = ref([
 
   .banner {
     padding: 50px 0;
+
     .inner-banner {
       width: 830px;
       display: flex;
@@ -319,11 +448,57 @@ const faqs = ref([
         align-items: center;
         justify-content: flex-end;
 
-        img{
-         width: 100%;
+        img {
+          width: 100%;
           height: 100%;
           border-radius: 14px;
           object-position: center;
+        }
+      }
+    }
+  }
+
+
+  .video-section {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 36px;
+
+    .image-wrapper {
+      width: 50%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 14px;
+        object-fit: cover;
+      }
+    }
+
+    .facts-wrapper {
+      width: 50%;
+      display: flex;
+      align-items: start;
+      flex-direction: column;
+      gap: 0;
+      justify-content: space-between;
+
+      .fact {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 10px;
+
+
+        .icon-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 40px;
+            height: 40px;
+          }
         }
       }
     }
@@ -379,6 +554,7 @@ const faqs = ref([
 
   .banner {
     padding: 50px 0;
+
     .inner-banner {
       width: 1048px;
       display: flex;
@@ -398,7 +574,7 @@ const faqs = ref([
         align-items: center;
         justify-content: flex-end;
 
-        img{
+        img {
           width: 100%;
           height: 100%;
           border-radius: 14px;
@@ -406,6 +582,25 @@ const faqs = ref([
         }
       }
     }
+  }
+
+  .video-section {
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 36px;
+
+    .image-wrapper {
+      width: 40%;
+
+      img {
+        width: 100%;
+        height: 100%;
+        border-radius: 14px;
+        object-fit: cover;
+      }
+    }
+
+
   }
 }
 

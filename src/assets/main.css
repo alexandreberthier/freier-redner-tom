@@ -37,6 +37,12 @@ a {
     color: var(--dark-green);
 }
 
+.image-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 h1, h2, h3, h3 {
     margin: 0;
     font-family: Playfair, sans-serif;
