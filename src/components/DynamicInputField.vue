@@ -74,7 +74,7 @@ const dynamicInputType = computed(() => {
     left: 14px;
     box-sizing: border-box;
     padding: 0 5px;
-    background-color: var(--creme);
+    background-color: var(--beige);
     font-size: 14px;
     color: var(--dark-green);
   }

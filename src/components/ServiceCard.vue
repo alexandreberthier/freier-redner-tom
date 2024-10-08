@@ -40,7 +40,7 @@ defineProps<{
   width: 300px;
   box-sizing: border-box;
   padding: 20px 14px;
-  border: 1px solid var(--light-green);
+  border: 1px solid var(--dark-green);
   border-radius: 20px;
   cursor: pointer;
   height: inherit;
@@ -49,7 +49,6 @@ defineProps<{
    transform: scale(1.1);
   }
 
-
   .image-wrapper {
     display: flex;
     align-items: center;
@@ -57,12 +56,13 @@ defineProps<{
     overflow: hidden;
     width: 100%;
     height: 200px;
+    border-radius: 14px;
 
     img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: 20px;
+      border-radius: 14px;
       transition: transform 400ms ease-in-out;
     }
   }

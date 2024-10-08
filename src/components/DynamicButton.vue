@@ -49,11 +49,11 @@ const linkOptions = computed(() =>
   }
 
   &.primary {
-    background-color: var(--light-green);
+    background-color: var(--dark-green);
     color: white;
 
     &:hover {
-      background-color: var(--dark-green)
+      background-color: var(--darker-green)
     }
   }
 

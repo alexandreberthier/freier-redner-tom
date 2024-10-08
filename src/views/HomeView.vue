@@ -381,7 +381,7 @@ onMounted(() => {
 }
 
 .text-section {
-  background-color: #FFDAB9;
+  background-color: var(--beige);
   width: 100%;
   padding: 60px 0;
   box-sizing: border-box;

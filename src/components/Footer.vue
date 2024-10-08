@@ -156,7 +156,7 @@ function toggleGroup(groupId: number) {
     box-sizing: border-box;
     padding: 18px 32px;
     border-radius: 14px;
-    background-color: var(--creme);
+    background-color: var(--beige);
     display: flex;
     flex-direction: column;
     gap: 24px;

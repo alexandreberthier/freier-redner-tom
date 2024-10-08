@@ -121,7 +121,7 @@ const facts = ref([
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--creme);
+  background-color: var(--beige);
   box-sizing: border-box;
   padding: 24px 0;
 

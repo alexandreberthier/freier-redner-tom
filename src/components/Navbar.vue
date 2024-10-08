@@ -44,8 +44,6 @@ import {onMounted, onUnmounted, ref, type Ref} from "vue";
 import type {Link} from "@/models/PropInterfaces";
 import DynamicButton from "@/components/DynamicButton.vue";
 import {ButtonType} from "@/models/ButtonTypes";
-
-
 const menuOpen: Ref<boolean> = ref(false)
 
 function toggleMenu() {
@@ -66,7 +64,6 @@ function toggleBodyScroll(isMenuOpen: boolean) {
   }
 }
 
-
 function handleResize() {
   if (window.innerWidth >= 1200) {
     toggleBodyScroll(false);
@@ -74,14 +71,13 @@ function handleResize() {
     toggleBodyScroll(menuOpen.value);
   }
 }
-
 onMounted(() => {
   window.addEventListener('resize', handleResize);
-});
+})
 
 onUnmounted(() => {
   window.removeEventListener('resize', handleResize);
-});
+})
 
 
 const links: Ref<Link[]> = ref([
@@ -110,7 +106,7 @@ const links: Ref<Link[]> = ref([
   width: 100%;
   box-sizing: border-box;
   height: 90px;
-  background-color: var(--creme);
+  background-color: var(--beige);
   display: flex;
   align-items: center;
   justify-content: space-between;
