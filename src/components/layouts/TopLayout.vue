@@ -6,19 +6,17 @@
     </div>
     <div class="image-section">
       <div class="right-section">
-        <div class="image-wrapper">
-          <img :src="getImage(image1)" :alt="image1">
+        <div ref="image1Ref" class="image-wrapper fade-from-left">
+          <img v-if="image1" :src="getImage(image1)" :alt="image1">
         </div>
         <div class="text-section">
-          <h3>{{textTitle}}</h3>
-          <div v-html="textContent">
-
-          </div>
+          <h3>{{ textTitle }}</h3>
+          <div v-html="textContent"></div>
         </div>
       </div>
       <div class="left-section">
-        <div class="image-wrapper">
-          <img :src="getImage(image2)" :alt="image2">
+        <div ref="image2Ref" class="image-wrapper fade-from-right">
+          <img v-if="image2" :src="getImage(image2)" :alt="image2">
         </div>
       </div>
     </div>
@@ -26,20 +24,53 @@
   </div>
 </template>
 
+
 <script setup lang="ts">
+import { ref, onMounted } from "vue";
+import { getImage } from "@/utils/ImageUtils";
 
-import {getImage} from "@/utils/ImageUtils";
-
+// Props
 defineProps<{
-  header: string,
-  subHeader: string
-  image1: string,
-  image2: string
-  textTitle: string
-  textContent:string
-}>()
+  header: string;
+  subHeader: string;
+  image1: string;  // Bild-URL als String
+  image2: string;  // Bild-URL als String
+  textTitle: string;
+  textContent: string;
+}>();
 
+// Refs für DOM-Elemente
+const image1Ref = ref<HTMLElement | null>(null);
+const image2Ref = ref<HTMLElement | null>(null);
+
+// Funktion für den Intersection Observer
+const fadeInObserver = (el: HTMLElement, className: string) => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add(className); // Klasse hinzufügen, wenn sichtbar
+        observer.unobserve(entry.target); // Beenden des Observers, wenn die Animation fertig ist
+      }
+    });
+  }, {
+    threshold: 0.1 // Stelle sicher, dass das Bild zu 10% sichtbar ist, bevor die Animation startet
+  });
+  observer.observe(el);
+};
+
+onMounted(() => {
+  if (image1Ref.value) {
+    fadeInObserver(image1Ref.value, 'fade-in-left');
+  }
+  if (image2Ref.value) {
+    fadeInObserver(image2Ref.value, 'fade-in-right');
+  }
+});
 </script>
+
+
+
+
 
 <style scoped>
 .heading {
@@ -90,6 +121,7 @@ defineProps<{
       display: flex;
       align-items: center;
       justify-content: center;
+
 
       img {
         width: 100%;
@@ -265,6 +297,27 @@ defineProps<{
     }
   }
 }
+.image-wrapper {
+  opacity: 0; /* Anfangs unsichtbar */
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out; /* Übergang für Bewegung und Einblenden */
+}
 
+.fade-from-left {
+  transform: translateX(-50px); /* Startposition links */
+}
+
+.fade-in-left {
+  transform: translateX(0); /* Zielposition in der Mitte */
+  opacity: 1; /* Einblenden */
+}
+
+.fade-from-right {
+  transform: translateX(50px); /* Startposition rechts */
+}
+
+.fade-in-right {
+  transform: translateX(0); /* Zielposition in der Mitte */
+  opacity: 1; /* Einblenden */
+}
 
 </style>
