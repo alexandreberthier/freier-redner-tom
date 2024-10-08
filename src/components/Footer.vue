@@ -29,7 +29,7 @@
       <div class="divider"></div>
       <div class="bottom-section">
         <div class="socials">
-          <p>Folg mir!</p>
+          <p>Updates gewünscht?</p>
           <div class="social-flex">
             <a class="social" href="https://www.instagram.com/">
               <div class="icon-wrapper">
@@ -44,7 +44,7 @@
           </div>
         </div>
         <div class="partner">
-          <p>...in Zusammenarbeit</p>
+          <p>...in Zusammenarbeit mit</p>
           <a href="https://freieredner.at/?gad_source=1&gclid=CjwKCAjwx4O4BhAnEiwA42SbVA5gXL_Eio1Z7rLDB4IMg5dxgrwKyoazUWmLHzZ1vaP8qhdy7vQm4hoCAjUQAvD_BwE">
             <div class="icon-wrapper">
               <img :src="getImage('freierednerlogo.png')" alt="freieredner">
@@ -250,9 +250,6 @@ function toggleGroup(groupId: number) {
         display: flex;
         flex-direction: column;
         gap: 8px;
-        p {
-
-        }
 
         .icon-wrapper {
           display: flex;

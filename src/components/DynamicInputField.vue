@@ -53,11 +53,9 @@ watch(userInput, (newVal: string) => {
   }
 })
 
-
-
 const dynamicInputType = computed(() => {
   return props.type || 'text';
-});
+})
 </script>
 
 <style scoped>

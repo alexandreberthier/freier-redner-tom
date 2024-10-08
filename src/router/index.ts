@@ -47,7 +47,9 @@ const router = createRouter({
     },
   ],
   scrollBehavior(to, from, savedPosition) {
-    if (to.hash) {
+    if (savedPosition) {
+      return savedPosition;
+    } else if (to.hash) {
       const element = document.querySelector(to.hash);
       if (element) {
         return {
@@ -56,7 +58,7 @@ const router = createRouter({
         };
       }
     } else {
-      return { x: 0, y: 0 };
+      return { x: 0, y: 0 }
     }
   }
 
