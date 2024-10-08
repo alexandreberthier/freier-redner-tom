@@ -35,8 +35,7 @@ html, body, p {
 }
 
 body {
-    background-color: var(--light-green);
-    color: var(--beige)
+    background-color: var(--light-beige);
 }
 
 a {
