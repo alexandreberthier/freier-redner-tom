@@ -24,18 +24,20 @@
     --darker-green: #0d322f;
     --light-green: #9fad88;
     --white: #ffffff;
-    --beige:#dfd5c5;
-    --light-beige: #fcfbf7;
+    --beige:#9fad88;
+    --light-beige: #f9f5eb;
 }
 
 html, body, p {
     margin: 0;
     padding: 0;
     font-family: Catamaran, sans-serif;
+    color: var(--darker-green)
 }
 
 body {
-    background-color: var(--light-beige);
+    background-color: var(--white);
+    color: var(--darker-green)
 }
 
 a {
