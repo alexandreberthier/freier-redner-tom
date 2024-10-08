@@ -29,31 +29,28 @@
 import { ref, onMounted } from "vue";
 import { getImage } from "@/utils/ImageUtils";
 
-// Props
 defineProps<{
   header: string;
   subHeader: string;
-  image1: string;  // Bild-URL als String
-  image2: string;  // Bild-URL als String
+  image1: string;
+  image2: string;
   textTitle: string;
   textContent: string;
 }>();
 
-// Refs für DOM-Elemente
 const image1Ref = ref<HTMLElement | null>(null);
 const image2Ref = ref<HTMLElement | null>(null);
 
-// Funktion für den Intersection Observer
 const fadeInObserver = (el: HTMLElement, className: string) => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
-        entry.target.classList.add(className); // Klasse hinzufügen, wenn sichtbar
-        observer.unobserve(entry.target); // Beenden des Observers, wenn die Animation fertig ist
+        entry.target.classList.add(className);
+        observer.unobserve(entry.target);
       }
     });
   }, {
-    threshold: 0.1 // Stelle sicher, dass das Bild zu 10% sichtbar ist, bevor die Animation startet
+    threshold: 0.1
   });
   observer.observe(el);
 };
@@ -67,9 +64,6 @@ onMounted(() => {
   }
 });
 </script>
-
-
-
 
 
 <style scoped>
@@ -298,26 +292,26 @@ onMounted(() => {
   }
 }
 .image-wrapper {
-  opacity: 0; /* Anfangs unsichtbar */
-  transition: transform 0.6s ease-out, opacity 0.6s ease-out; /* Übergang für Bewegung und Einblenden */
+  opacity: 0;
+  transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 }
 
 .fade-from-left {
-  transform: translateX(-50px); /* Startposition links */
+  transform: translateX(-50px);
 }
 
 .fade-in-left {
-  transform: translateX(0); /* Zielposition in der Mitte */
-  opacity: 1; /* Einblenden */
+  transform: translateX(0);
+  opacity: 1;
 }
 
 .fade-from-right {
-  transform: translateX(50px); /* Startposition rechts */
+  transform: translateX(50px);
 }
 
 .fade-in-right {
-  transform: translateX(0); /* Zielposition in der Mitte */
-  opacity: 1; /* Einblenden */
+  transform: translateX(0);
+  opacity: 1;
 }
 
 </style>
