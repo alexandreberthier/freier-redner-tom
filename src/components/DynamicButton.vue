@@ -52,6 +52,10 @@ const linkOptions = computed(() =>
     background-color: var(--dark-green);
     color: white;
 
+    p {
+      color: white;
+    }
+
     &:hover {
       background-color: var(--darker-green)
     }
