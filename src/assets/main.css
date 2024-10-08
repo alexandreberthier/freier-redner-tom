@@ -19,6 +19,14 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: Josefin;
+    src: url("../assets/fonts/JosefinSlab-Medium.ttf");
+    font-style: normal;
+    font-display: swap;
+}
+
+
 :root {
     --dark-green: #11423e;
     --darker-green: #0d322f;
@@ -31,7 +39,7 @@
 html, body, p {
     margin: 0;
     padding: 0;
-    font-family: Catamaran, sans-serif;
+    font-family: Josefin, sans-serif;
     color: var(--darker-green)
 }
 
