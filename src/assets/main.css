@@ -26,6 +26,13 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: Gowung;
+    src: url("../assets/fonts/GowunBatang-Regular.ttf");
+    font-style: normal;
+    font-display: swap;
+}
+
 
 :root {
     --dark-green: #11423e;
@@ -39,7 +46,7 @@
 html, body, p {
     margin: 0;
     padding: 0;
-    font-family: Josefin, sans-serif;
+    font-family: Gowung, sans-serif;
     color: var(--darker-green)
 }
 
